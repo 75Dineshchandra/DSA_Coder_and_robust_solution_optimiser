@@ -27,7 +27,7 @@ Unlike simple runners, this system generates a **Type-2 Validation Suite**. It u
 ### ⚡ The Optimizer (`optimize_solution`)
 The optimizer receives the `base_code` and a JSON object containing `failed_cases`. It is instructed to perform a **Complexity Audit** to replace $O(N^2)$ approaches with $O(N \log N)$ or $O(N)$ wherever possible.
 
-### 🎓 Senior Tutor (`llm_compare_solutions`)
+### 🎓 Tutor (`llm_compare_solutions`)
 This acts as the final stage, providing a comparison between the initial "Naive" solution and the "Optimized" solution. It provides:
 * **Complexity Comparison:** Analysis of time and space complexity shifts (e.g., $O(2^n)$ vs $O(n)$).
 * **Impact Analysis:** Determining if the change is a "True Optimization" or just a "Refactor."
