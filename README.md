@@ -91,6 +91,11 @@ final_code = full_pipeline(
 
 ---
 
+## ⚠️ Known Limitations
+* **Test Case Execution:** Generated test cases occasionally fail to map correctly to function signatures due to structured output limitations at 7B scale. The optimization loop functions independently of this.
+* **Problem Scope:** Currently supports standard array, string, and integer problems. Binary Tree and Linked List support is in progress.
+---
+
 ## ⚠️ Safety & Constraints
 * **Execution Safety:** The project uses `exec()` to run LLM-generated code. **Must** be run in a sandboxed environment (like a Colab VM).
 * **Deterministic Logic:** All generation tasks are set to `temperature: 0` to ensure logical code output rather than creative prose.
