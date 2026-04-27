@@ -1,6 +1,6 @@
 # DSA_Coder_and_robust_solution_optimiser
 
-This project is an automated, end-to-end pipeline designed to solve, test, and optimize Data Structures and Algorithms (DSA) problems using **Llama-3 7B** via the **Ollama** framework. It transforms raw, unstructured problem descriptions into high-performance, validated Python code through a self-correcting feedback loop.
+This project is an end-to-end system designed to solve, test, and optimize Data Structures and Algorithms (DSA) problems using **Llama-3 7B** via the **Ollama** framework. It transforms raw, unstructured problem descriptions into high-performance, validated Python code through a self-correcting feedback loop. Built on the observation that LLM first-pass solutions are rarely optimal, this system goes beyond generation by closing the loop with execution, validation, and iterative repair to produce better complexity outcomes.
 
 ---
 
