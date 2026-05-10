@@ -57,7 +57,7 @@ A boundary-aware regex pattern extracts Input/Output pairs directly from the pro
 The LLM generates an initial `class Solution` which is immediately executed in a sandboxed environment against the extracted sample tests. On failure, the full Python traceback is captured and fed back with explicit fix instructions. The system retries up to **3 times** and keeps the attempt with the highest pass rate as the base solution.
 
 ### 🧬 Stress Test Generator (`generate_all_tests`)
-The core of this stage is **Hypothesis**, Python's property-based testing library. Rather than relying solely on the LLM to imagine edge cases, Hypothesis takes the extracted `problem_text`, the parsed `constraints`, and the validated `sample_testcases` as its inputs — and uses them to infer the shape, bounds, and types of valid inputs for the problem. From that, it automatically generates a large, diverse set of inputs that probe the solution's behaviour as a property rather than a fixed expected output. The LLM then supplements this with semantically meaningful edge cases that require understanding the problem's intent. Every candidate test passes through a validation gate that checks for required fields, forbidden expressions, structural consistency, and duplicates.
+The core of this stage is **Hypothesis**, Python's property-based testing library. Rather than relying solely on the LLM to imagine edge cases, Hypothesis takes the extracted `problem_text`, the parsed `constraints`, and the validated `sample_testcases` as its inputs and uses them to infer the shape, bounds, and types of valid inputs for the problem. From that, it automatically generates a large, diverse set of inputs that probe the solution's behaviour as a property rather than a fixed expected output. The LLM then supplements this with semantically meaningful edge cases that require understanding the problem's intent. Every candidate test passes through a validation gate that checks for required fields, forbidden expressions, structural consistency, and duplicates.
 
 ### ⚡ The Optimiser (`optimize_solution`)
 Receives the base solution and any failing stress tests as evidence. Instructs the LLM to perform a **Complexity Audit** — replacing O(N²) patterns with O(N log N) or O(N) equivalents such as two-pointer, sliding window, binary search, or hash-based lookups.
@@ -129,6 +129,7 @@ class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
 """
 ```
+note: make sure other problem_text data is not overwriting your code
 
 The pipeline handles everything from there — preprocessing, solving, stress testing, optimising, and reporting.
 
@@ -136,7 +137,7 @@ The pipeline handles everything from there — preprocessing, solving, stress te
 
 ## 🛠 Future Improvements
 
-* **Model Scaling:** Evaluating larger reasoning models (34B / 70B) for harder edge case generation and optimisation quality.
+* **Model Scaling:** Evaluating larger reasoning models (70B) for harder edge case generation and optimisation quality.
 * **Type Hint Support:** Integrating `TreeNode` and `ListNode` parsers to support Binary Tree and Linked List problems.
 * **Memory Profiling:** Adding `memory_profiler` for empirical space complexity data alongside the theoretical audit.
 * **Multi-Model Support:** Adding comparison and benchmarking between **Llama3**, **Mixtral**, and **Phi-3**.
